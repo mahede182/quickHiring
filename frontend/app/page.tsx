@@ -1,10 +1,10 @@
 import { Header } from '@/components/header';
-import { HeroSection } from '@/components/hero-section';
-import { CompaniesSection } from '@/components/companies-section';
-import { CategoriesSection } from '@/components/categories-section';
-import { CTASection } from '@/components/cta-section';
-import { FeaturedJobsSection } from '@/components/featured-jobs-section';
-import { LatestJobsSection } from '@/components/latest-jobs-section';
+import { HeroSection } from '@/components/heroSection';
+import { CompaniesSection } from '@/components/companiesSection';
+import { CategoriesSection } from '@/components/categoriesSection';
+import { CTASection } from '@/components/ctaSection';
+import { FeaturedJobsSection } from '@/components/featuredJobsSection';
+import { LatestJobsSection } from '@/components/latestJobsSection';
 import { Footer } from '@/components/footer';
 
 export const metadata = {
