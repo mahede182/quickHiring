@@ -1,93 +1,14 @@
-'use client';
-
-import type { FeaturedJob } from '@types/featuredJob';
+import type { FeaturedJob } from '@/@types/featuredJob';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export function FeaturedJobsSection() {
-  const jobs: FeaturedJob[] = [
-    {
-      id: 1,
-      company: 'Revolut',
-      role: 'Email Marketing',
-      location: 'Madrid, Spain',
-      description: 'Revolut is looking for Email Marketing to help team ma...',
-      tags: ['Marketing', 'Design'],
-      logo: '/assets/images/featureJobs/Company1.png',
-      type: 'Full Time',
-    },
-    {
-      id: 2,
-      company: 'Dropbox',
-      role: 'Brand Designer',
-      location: 'San Francisco, US',
-      description: 'Dropbox is looking for Brand Designer to help the team f...',
-      tags: ['Design', 'Business'],
-      logo: '/assets/images/featureJobs/Company2.png',
-      type: 'Full Time',
-    },
-    {
-      id: 3,
-      company: 'Pitch',
-      role: 'Email Marketing',
-      location: 'Berlin, Germany',
-      description: 'Pitch is looking for Customer Manager to join marketing t...',
-      tags: ['Marketing'],
-      logo: '/assets/images/featureJobs/Company3.png',
-      type: 'Full Time',
-    },
-    {
-      id: 4,
-      company: 'Blinklist',
-      role: 'Visual Designer',
-      location: 'Granada, Spain',
-      description: 'Blinklist is looking for Visual Designer to help team desi...',
-      tags: ['Design'],
-      logo: '/assets/images/featureJobs/Company4.png',
-      type: 'Full Time',
-    },
-    {
-      id: 5,
-      company: 'ClassPass',
-      role: 'Product Designer',
-      location: 'Manchester, UK',
-      description: 'ClassPass is looking for Product Designer to help us...',
-      tags: ['Marketing', 'Design'],
-      logo: '/assets/images/featureJobs/Company5.png',
-      type: 'Full Time',
-    },
-    {
-      id: 6,
-      company: 'Canva',
-      role: 'Lead Designer',
-      location: 'Ontario, Canada',
-      description: 'Canva is looking for Lead Engineer to help develop n...',
-      tags: ['Design', 'Business'],
-      logo: '/assets/images/featureJobs/Company6.png',
-      type: 'Full Time',
-    },
-    {
-      id: 7,
-      company: 'GoDaddy',
-      role: 'Brand Strategist',
-      location: 'Marseille, France',
-      description: 'GoDaddy is looking for Brand Strategist to join the team...',
-      tags: ['Marketing'],
-      logo: '/assets/images/featureJobs/Company7.png',
-      type: 'Full Time',
-    },
-    {
-      id: 8,
-      company: 'Twitter',
-      role: 'Data Analyst',
-      location: 'San Diego, US',
-      description: 'Twitter is looking for Data Analyst to help team desi...',
-      tags: ['Technology'],
-      logo: '/assets/images/featureJobs/Company8.png',
-      type: 'Full Time',
-    },
-  ];
+type Props = {
+  jobs: FeaturedJob[];
+  onJobClick: (jobId: number) => void;
+};
+
+export function FeaturedJobsSection({ jobs, onJobClick }: Props) {
 
   return (
     <section className="bg-background py-8 sm:py-12 lg:py-14">
@@ -107,6 +28,7 @@ export function FeaturedJobsSection() {
           {jobs.map((job) => (
             <div
               key={job.id}
+              onClick={() => onJobClick(job.id)}
               className="bg-card border border-border rounded-lg p-4 sm:p-6 hover:shadow-lg transition-all cursor-pointer hover:border-primary"
             >
               {/* Header: Logo + Type */}

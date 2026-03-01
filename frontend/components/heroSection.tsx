@@ -1,9 +1,42 @@
 'use client';
 
+import type { Job } from '@/@types/job';
 import { Button } from '@/components/ui/button';
+import { searchJobs } from '@/lib/client-api';
 import Image from 'next/image';
+import { useState, useRef } from 'react';
 
-export function HeroSection() {
+type Props = {
+  allJobs: Job[];
+  onJobClick: (jobId: number) => void;
+};
+
+export function HeroSection({ allJobs, onJobClick }: Props) {
+  const [query, setQuery] = useState('');
+  const [location, setLocation] = useState('');
+  const [results, setResults] = useState<Job[]>([]);
+  const [showResults, setShowResults] = useState(false);
+  const [searching, setSearching] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  async function handleSearch() {
+    if (!query.trim() && !location.trim()) return;
+    setSearching(true);
+    const jobs = await searchJobs(query.trim(), location.trim());
+    setResults(jobs);
+    setShowResults(true);
+    setSearching(false);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (e.key === 'Enter') handleSearch();
+  }
+
+  function handleResultClick(jobId: number) {
+    setShowResults(false);
+    onJobClick(jobId);
+  }
+
   return (
     <section className="relative overflow-hidden bg-background py-8 sm:py-12 lg:py-16">
       {/* Background Image */}
@@ -41,8 +74,7 @@ export function HeroSection() {
             </p>
 
             {/* Search Box */}
-            <div className="space-y-3">
-              {/* Mobile: stacked, Desktop: inline */}
+            <div className="space-y-3 relative" ref={containerRef}>
               <div className="flex flex-col sm:flex-row bg-white rounded shadow-sm border border-border">
                 <div className="flex-1 flex items-center gap-2 px-4 py-3 border-b sm:border-b-0 sm:border-r border-border">
                   <Image
@@ -55,6 +87,9 @@ export function HeroSection() {
                   <input
                     type="text"
                     placeholder="Job title or keyword"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     className="flex-1 bg-transparent outline-none text-sm text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
@@ -69,21 +104,62 @@ export function HeroSection() {
                   <input
                     type="text"
                     placeholder="Florence, Italy"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     className="flex-1 bg-transparent outline-none text-sm text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
                 <div className="p-1.5">
-                  <Button className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground px-6 h-full text-sm">
-                    Search my job
+                  <Button
+                    onClick={handleSearch}
+                    disabled={searching}
+                    className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground px-6 h-full text-sm"
+                  >
+                    {searching ? 'Searching...' : 'Search my job'}
                   </Button>
                 </div>
               </div>
+
+              {/* Search Results Dropdown */}
+              {showResults && (
+                <div className="absolute top-full left-0 right-0 z-20 mt-1 bg-white border border-border rounded-lg shadow-lg max-h-80 overflow-y-auto">
+                  {results.length === 0 ? (
+                    <p className="p-4 text-sm text-muted-foreground text-center">No jobs found.</p>
+                  ) : (
+                    results.map((job) => (
+                      <button
+                        key={job.id}
+                        type="button"
+                        onClick={() => handleResultClick(job.id)}
+                        className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors border-b border-border last:border-b-0"
+                      >
+                        <p className="text-sm font-medium text-foreground">{job.title}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {job.company} · {job.location} · {job.job_type}
+                        </p>
+                      </button>
+                    ))
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setShowResults(false)}
+                    className="w-full text-center py-2 text-xs text-muted-foreground hover:text-foreground transition-colors border-t border-border"
+                  >
+                    Close
+                  </button>
+                </div>
+              )}
 
               {/* Popular Tags */}
               <p className="text-xs text-muted-foreground">
                 <span className="font-medium">Popular : </span>
                 {['UI Designer', 'UX Researcher', 'Android', 'Admin'].map((tag, i, arr) => (
-                  <span key={tag} className="hover:text-primary cursor-pointer transition-colors">
+                  <span
+                    key={tag}
+                    className="hover:text-primary cursor-pointer transition-colors"
+                    onClick={() => { setQuery(tag); }}
+                  >
                     {tag}{i < arr.length - 1 ? ', ' : ''}
                   </span>
                 ))}
