@@ -1,21 +1,14 @@
-'use client';
-
-import type { LatestJob } from '@types/latestJob';
+import type { LatestJob } from '@/@types/latestJob';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export function LatestJobsSection() {
-  const jobs: LatestJob[] = [
-    { id: 1, company: 'Nomad', role: 'Social Media Assistant', location: 'Paris, France', tags: ['Full-Time', 'Marketing', 'Design'], logo: '/assets/images/latestJobs/Job1.png' },
-    { id: 2, company: 'Netlify', role: 'Social Media Assistant', location: 'Paris, France', tags: ['Full-Time', 'Marketing', 'Design'], logo: '/assets/images/latestJobs/Job2.png' },
-    { id: 3, company: 'Dropbox', role: 'Brand Designer', location: 'San Francisco, USA', tags: ['Full-Time', 'Marketing', 'Design'], logo: '/assets/images/latestJobs/Job3.png' },
-    { id: 4, company: 'Maze', role: 'Brand Designer', location: 'San Francisco, USA', tags: ['Full-Time', 'Marketing', 'Design'], logo: '/assets/images/latestJobs/Job4.png' },
-    { id: 5, company: 'Terraform', role: 'Interactive Developer', location: 'Hamburg, Germany', tags: ['Full-Time', 'Marketing', 'Design'], logo: '/assets/images/latestJobs/Job5.png' },
-    { id: 6, company: 'Udacity', role: 'Interactive Developer', location: 'Hamburg, Germany', tags: ['Full-Time', 'Marketing', 'Design'], logo: '/assets/images/latestJobs/Job6.png' },
-    { id: 7, company: 'Packer', role: 'HR Manager', location: 'Lucern, Switzerland', tags: ['Full-Time', 'Marketing', 'Design'], logo: '/assets/images/latestJobs/Job7.png' },
-    { id: 8, company: 'Webflow', role: 'HR Manager', location: 'Lucern, Switzerland', tags: ['Full-Time', 'Marketing', 'Design'], logo: '/assets/images/latestJobs/Job8.png' },
-  ];
+type Props = {
+  jobs: LatestJob[];
+  onJobClick: (jobId: number) => void;
+};
+
+export function LatestJobsSection({ jobs, onJobClick }: Props) {
 
   return (
     <section className="relative bg-[#f0f7ff] py-8 sm:py-12 lg:py-14 overflow-hidden">
@@ -43,6 +36,7 @@ export function LatestJobsSection() {
           {jobs.map((job) => (
             <div
               key={job.id}
+              onClick={() => onJobClick(job.id)}
               className="bg-white/80 backdrop-blur-sm border border-border rounded-lg p-4 sm:p-6 hover:shadow-lg transition-all cursor-pointer hover:border-primary flex items-center gap-3 sm:gap-4"
             >
               {/* Company Logo */}
