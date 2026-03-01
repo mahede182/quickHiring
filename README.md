@@ -19,8 +19,8 @@ A full-stack job listing platform where users can browse jobs, search by keyword
 
 | Service    | URL                                                         |
 | ---------- | ----------------------------------------------------------- |
-| 🖥 Frontend | [quickhiring-frontend.onrender.com](https://quickhiring-frontend.onrender.com) |
-| 🔧 Backend  | [https://quickhiring-1.onrender.com/](https://quickhiring-1.onrender.com/)         |
+| 🔧 Frontend  | [https://quickhiring-1.onrender.com/](https://quickhiring-1.onrender.com/)         |
+| 🖥 Backend | [https://quickhiring-oir5.onrender.com](https://quickhiring-oir5.onrender.com) |
 | 🐘 Database | `postgresql://quickhiring_user:****@dpg-d6i9seogjchc73d79dv0-a.singapore-postgres.render.com/quickhiring` |
 
 ## 📺 Preview
