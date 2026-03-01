@@ -1,10 +1,13 @@
 require("dotenv").config();
 const pgp = require("pg-promise")();
 
-const db = pgp(
-    process.env.DATABASE_URL ||
-    "postgresql://postgres:@localhost:5432/quickhire?schema=public"
-);
+const connStr = process.env.DATABASE_URL || "postgresql://postgres:@localhost:5432/quickhire?schema=public";
+const ssl = connStr.includes("render.com") ? { rejectUnauthorized: false } : false;
+
+const db = pgp({
+    connectionString: connStr,
+    ssl,
+});
 
 const jobs = [
     ["Senior Frontend Developer", "TechCorp", "San Francisco, CA", "Engineering", "We are looking for an experienced Frontend Developer proficient in React, TypeScript, and modern CSS frameworks.", "$120,000 - $150,000", "Full-time"],

@@ -1,7 +1,14 @@
 const pgp = require("pg-promise")();
 const config = require("./index");
 
-const db = pgp(config.databaseUrl);
+const ssl = config.nodeEnv !== "development" || config.databaseUrl.includes("render.com")
+    ? { rejectUnauthorized: false }
+    : false;
+
+const db = pgp({
+    connectionString: config.databaseUrl,
+    ssl,
+});
 
 db.connect()
     .then((obj) => {
