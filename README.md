@@ -23,6 +23,10 @@ A full-stack job listing platform where users can browse jobs, search by keyword
 | 🔧 Backend  | [https://quickhiring-1.onrender.com/](https://quickhiring-1.onrender.com/)         |
 | 🐘 Database | `postgresql://quickhiring_user:****@dpg-d6i9seogjchc73d79dv0-a.singapore-postgres.render.com/quickhiring` |
 
+## 📺 Preview
+
+https://github.com/user-attachments/assets/eeaa440d-2669-44a9-8a64-f4f3b4387f48
+
 
 ## Project Structure
 
