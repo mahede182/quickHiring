@@ -1,3 +1,4 @@
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
@@ -10,7 +11,7 @@
   --card-foreground: oklch(0.16 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.16 0 0);
-  --primary: oklch(0.45 0.3 260);
+  --primary: oklab(48.946% 0.02177 -0.22888);
   --primary-foreground: oklch(0.98 0 0);
   --secondary: oklch(0.96 0.01 240);
   --secondary-foreground: oklch(0.16 0 0);
@@ -37,6 +38,7 @@
   --sidebar-accent-foreground: oklch(0.45 0.3 260);
   --sidebar-border: oklch(0.92 0 0);
   --sidebar-ring: oklch(0.45 0.3 260);
+  --section-highlight: #26A4FF;
 }
 
 .dark {
@@ -72,10 +74,12 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
+  --section-highlight: #26A4FF;
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback';
+  --font-sans: var(--font-epilogue), 'sans-serif';
+  --font-heading: 'Clash Display', var(--font-epilogue), 'sans-serif';
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -113,6 +117,7 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-section-highlight: var(--section-highlight);
 }
 
 @layer base {

@@ -1,37 +1,38 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Briefcase } from 'lucide-react';
+import Image from 'next/image';
 
 export function Header() {
   return (
-    <header className="border-b border-border">
-      <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+    <header className="border-b border-border bg-background">
+      <div className="mx-auto max-w-7xl px-6 py-3 sm:px-8 lg:px-10">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
-              <Briefcase className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <span className="text-lg font-semibold text-foreground">Quickhire</span>
+          {/* Logo + Nav */}
+          <div className="flex items-center gap-8">
+            <Image
+              src="/assets/images/logo.png"
+              alt="QuickHire"
+              width={140}
+              height={36}
+              className="h-7 w-auto"
+            />
+            <nav className="hidden md:flex items-center gap-6">
+              <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                Find Jobs
+              </a>
+              <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                Browse Companies
+              </a>
+            </nav>
           </div>
 
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            <a href="#" className="text-sm text-foreground hover:text-primary transition-colors">
-              Find Jobs
-            </a>
-            <a href="#" className="text-sm text-foreground hover:text-primary transition-colors">
-              Browse Companies
-            </a>
-          </nav>
-
           {/* Auth Buttons */}
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm">
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" size="sm" className="text-primary font-semibold">
               Login
             </Button>
-            <Button size="sm" className="bg-primary hover:bg-primary/90">
+            <Button size="sm" className="bg-primary hover:bg-primary/90 px-5">
               Sign Up
             </Button>
           </div>
